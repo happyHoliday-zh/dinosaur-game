@@ -1,3 +1,15 @@
+function clamp(value, min, max) {
+  return Math.min(max, Math.max(min, value));
+}
+
+export function resolvePlayerX(trackWidth, isPortrait) {
+  if (isPortrait) {
+    return Math.round(clamp(trackWidth * 0.18, 54, 96));
+  }
+
+  return Math.round(clamp(trackWidth * 0.21, 140, 220));
+}
+
 export function createPlayerState(config) {
   const baseY = config.groundY - config.height;
 
@@ -11,16 +23,19 @@ export function createPlayerState(config) {
     gravity: config.gravity,
     jumpVelocity: config.jumpVelocity,
     isGrounded: true,
+    maxJumps: config.maxJumps ?? 2,
+    jumpsUsed: 0,
   };
 }
 
 export function jumpPlayer(player) {
-  if (!player.isGrounded) {
+  if (player.jumpsUsed >= player.maxJumps) {
     return false;
   }
 
   player.velocityY = -player.jumpVelocity;
   player.isGrounded = false;
+  player.jumpsUsed += 1;
   return true;
 }
 
@@ -32,6 +47,7 @@ export function updatePlayer(player, deltaTime) {
     player.y = player.baseY;
     player.velocityY = 0;
     player.isGrounded = true;
+    player.jumpsUsed = 0;
   }
 
   return player;

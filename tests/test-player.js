@@ -1,4 +1,4 @@
-import { createPlayerState, jumpPlayer, updatePlayer } from '../scripts/player.js';
+import { createPlayerState, jumpPlayer, resolvePlayerX, updatePlayer } from '../scripts/player.js';
 
 function assert(condition, message) {
   if (!condition) {
@@ -7,8 +7,15 @@ function assert(condition, message) {
 }
 
 export function runPlayerTests() {
+  const landscapeX = resolvePlayerX(960, false);
+  const portraitX = resolvePlayerX(480, true);
+
+  assert(landscapeX > portraitX, 'landscape player position should sit farther right than portrait');
+  assert(portraitX < 120, 'portrait player position should stay left of center on narrow screens');
+
   const player = createPlayerState({
     groundY: 220,
+    x: landscapeX,
     height: 40,
     jumpVelocity: 680,
     gravity: 1800,
@@ -18,11 +25,20 @@ export function runPlayerTests() {
 
   assert(player.isGrounded === false, 'player should leave the ground after jumping');
   assert(player.velocityY < 0, 'jump should launch the player upward');
+  assert(player.jumpsUsed === 1, 'first jump should consume one jump');
 
-  const velocityAfterFirstJump = player.velocityY;
+  updatePlayer(player, 1 / 12);
+  const velocityBeforeSecondJump = player.velocityY;
   jumpPlayer(player);
 
-  assert(player.velocityY === velocityAfterFirstJump, 'player should not double jump while airborne');
+  assert(player.velocityY < velocityBeforeSecondJump, 'player should be able to trigger a second jump while airborne');
+  assert(player.jumpsUsed === 2, 'second jump should consume the second jump charge');
+
+  const velocityAfterSecondJump = player.velocityY;
+  jumpPlayer(player);
+
+  assert(player.velocityY === velocityAfterSecondJump, 'player should not be able to jump a third time before landing');
+  assert(player.jumpsUsed === 2, 'third jump attempt should not increase jumps used');
 
   for (let index = 0; index < 90; index += 1) {
     updatePlayer(player, 1 / 60);
@@ -30,4 +46,5 @@ export function runPlayerTests() {
 
   assert(player.isGrounded === true, 'player should land back on the ground');
   assert(player.y === player.baseY, 'player y should return to the base ground position');
+  assert(player.jumpsUsed === 0, 'landing should reset jump charges');
 }

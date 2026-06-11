@@ -3,6 +3,7 @@ import { runObstacleTests } from './test-obstacles.js';
 import { runInputTests } from './test-input.js';
 import { runCoinTests } from './test-coins.js';
 import { runAudioTests } from './test-audio.js';
+import { runGameStartTests } from './test-game-start.js';
 
 const suites = [
   ['player', runPlayerTests],
@@ -10,6 +11,7 @@ const suites = [
   ['input', runInputTests],
   ['coins', runCoinTests],
   ['audio', runAudioTests],
+  ['game-start', runGameStartTests],
 ];
 
 const failures = [];

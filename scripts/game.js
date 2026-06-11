@@ -3,7 +3,7 @@ import { createAmbientAudioController } from './audio.js';
 import { collectCoins, createCoinManager, createCoinPattern, shouldSpawnCoinPattern, updateCoins } from './coins.js';
 import { createInputController } from './input.js';
 import { createObstacleManager, detectCollision, getObstacleBounds, listObstacleTypes, markPassedObstacles, shouldSpawnObstacle, updateObstacles } from './obstacles.js';
-import { createPlayerState, getPlayerBounds, jumpPlayer, updatePlayer } from './player.js';
+import { createPlayerState, getPlayerBounds, jumpPlayer, resolvePlayerX, updatePlayer } from './player.js';
 import { createUiController } from './ui.js';
 
 export class DungeonRunnerGame {
@@ -37,6 +37,7 @@ export class DungeonRunnerGame {
     this.bindUi();
     this.createSession();
     this.attachInput();
+    this.attachResizeHandling();
     this.ui.showStart();
     this.focusGame();
     this.render();
@@ -69,13 +70,24 @@ export class DungeonRunnerGame {
     this.root.focus?.({ preventScroll: true });
   }
 
+  attachResizeHandling() {
+    this.handleResize = () => {
+      this.refreshLayoutMetrics();
+      this.render();
+    };
+
+    window.addEventListener('resize', this.handleResize);
+  }
+
   createSession() {
     const trackWidth = this.track.clientWidth || GAME_CONFIG.width;
     const trackHeight = this.track.clientHeight || GAME_CONFIG.height;
     const groundY = trackHeight - GAME_CONFIG.groundOffset;
+    const isPortrait = trackHeight > trackWidth;
 
     this.player = createPlayerState({
       ...GAME_CONFIG.player,
+      x: resolvePlayerX(trackWidth, isPortrait),
       groundY,
     });
 
@@ -94,6 +106,28 @@ export class DungeonRunnerGame {
     this.clearCoins();
     this.playerSpriteNode.classList.remove('player-jumping');
     this.playerSpriteNode.classList.add('player-running');
+  }
+
+  refreshLayoutMetrics() {
+    const trackWidth = this.track.clientWidth || GAME_CONFIG.width;
+    const trackHeight = this.track.clientHeight || GAME_CONFIG.height;
+    const groundY = trackHeight - GAME_CONFIG.groundOffset;
+    const isPortrait = trackHeight > trackWidth;
+
+    if (!this.player) {
+      return;
+    }
+
+    const heightAboveGround = this.player.baseY - this.player.y;
+
+    this.player.x = resolvePlayerX(trackWidth, isPortrait);
+    this.player.baseY = groundY - this.player.height;
+    this.player.y = this.player.baseY - heightAboveGround;
+
+    this.obstacleManager.laneWidth = trackWidth;
+    this.obstacleManager.groundY = groundY;
+    this.coinManager.laneWidth = trackWidth;
+    this.coinManager.groundY = groundY;
   }
 
   attachInput() {
