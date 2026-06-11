@@ -22,6 +22,7 @@ export const GAME_CONFIG = {
   storageKeys: {
     highScore: 'dungeon-runner-high-score',
     totalCoins: 'dungeon-runner-total-coins',
+    audioMuted: 'dungeon-runner-audio-muted',
   },
 };
 

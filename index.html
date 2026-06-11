@@ -20,7 +20,24 @@
             <span class="torch torch-right"></span>
           </div>
           <div class="player" id="player" aria-hidden="true">
-            <div class="player-sprite skeleton-runner" id="player-sprite"></div>
+            <div class="player-sprite skeleton-runner" id="player-sprite">
+              <span class="skeleton-cape"></span>
+              <span class="skeleton-shield"></span>
+              <span class="skeleton-skull">
+                <span class="skeleton-eye skeleton-eye-left"></span>
+                <span class="skeleton-eye skeleton-eye-right"></span>
+                <span class="skeleton-nose"></span>
+                <span class="skeleton-teeth"></span>
+              </span>
+              <span class="skeleton-body">
+                <span class="rib rib-a"></span>
+                <span class="rib rib-b"></span>
+                <span class="rib rib-c"></span>
+              </span>
+              <span class="skeleton-leg skeleton-leg-left"></span>
+              <span class="skeleton-leg skeleton-leg-right"></span>
+              <span class="helmet-cap"></span>
+            </div>
           </div>
           <div class="coin-layer" id="coin-layer" aria-hidden="true"></div>
           <div class="obstacle-layer" id="obstacle-layer" aria-hidden="true"></div>
@@ -31,6 +48,7 @@
             <span class="hud-label">COINS</span>
             <strong id="coin-count">000</strong>
           </div>
+          <button class="hud-toggle" id="audio-toggle" type="button" aria-pressed="false">MUSIC ON</button>
           <div class="hud-panel hud-panel-right">
             <span class="hud-label">HI</span>
             <strong id="high-score">00000</strong>

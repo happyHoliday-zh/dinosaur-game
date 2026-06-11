@@ -1,4 +1,5 @@
 import { GAME_CONFIG, clamp, randomBetween } from './config.js';
+import { createAmbientAudioController } from './audio.js';
 import { collectCoins, createCoinManager, createCoinPattern, updateCoins } from './coins.js';
 import { createInputController } from './input.js';
 import { createObstacleManager, detectCollision, getObstacleBounds, listObstacleTypes, markPassedObstacles, shouldSpawnObstacle, updateObstacles } from './obstacles.js';
@@ -29,6 +30,9 @@ export class DungeonRunnerGame {
     const initialProgress = this.ui.getInitialProgress();
     this.highScore = initialProgress.highScore;
     this.totalCoins = initialProgress.totalCoins;
+    this.audio = createAmbientAudioController({
+      initialMuted: initialProgress.audioMuted,
+    });
 
     this.bindUi();
     this.createSession();
@@ -41,6 +45,12 @@ export class DungeonRunnerGame {
   bindUi() {
     this.startButton.addEventListener('click', () => this.start());
     this.restartButton.addEventListener('click', () => this.restart());
+    this.ui.bindAudioToggle(() => {
+      const isMuted = this.audio.toggleMute();
+      this.ui.updateAudioToggle(isMuted);
+      this.ui.persistAudioMuted(isMuted);
+    });
+    this.ui.updateAudioToggle(this.audio.getSnapshot().muted);
   }
 
   focusGame() {
@@ -107,6 +117,7 @@ export class DungeonRunnerGame {
     this.ui.hideStart();
     this.ui.hideGameOver();
     this.focusGame();
+    this.audio.startRun();
 
     if (!this.rafId) {
       this.rafId = requestAnimationFrame((timestamp) => this.frame(timestamp));
@@ -251,6 +262,7 @@ export class DungeonRunnerGame {
     this.state = 'gameOver';
     cancelAnimationFrame(this.rafId);
     this.rafId = 0;
+    this.audio.setGameOver();
     this.ui.persistHighScore(this.highScore);
     this.ui.persistTotalCoins(this.totalCoins);
     this.ui.showGameOver({
