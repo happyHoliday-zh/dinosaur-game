@@ -2,12 +2,8 @@ function clamp(value, min, max) {
   return Math.min(max, Math.max(min, value));
 }
 
-export function resolvePlayerX(trackWidth, isPortrait) {
-  if (isPortrait) {
-    return Math.round(clamp(trackWidth * 0.18, 54, 96));
-  }
-
-  return Math.round(clamp(trackWidth * 0.21, 140, 220));
+export function resolvePlayerX(trackWidth) {
+  return Math.round(clamp(trackWidth * 0.21, 72, 220));
 }
 
 export function createPlayerState(config) {

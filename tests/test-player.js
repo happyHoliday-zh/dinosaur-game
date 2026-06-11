@@ -7,11 +7,12 @@ function assert(condition, message) {
 }
 
 export function runPlayerTests() {
-  const landscapeX = resolvePlayerX(960, false);
-  const portraitX = resolvePlayerX(480, true);
+  const landscapeX = resolvePlayerX(960);
+  const portraitX = resolvePlayerX(480);
 
   assert(landscapeX > portraitX, 'landscape player position should sit farther right than portrait');
-  assert(portraitX < 120, 'portrait player position should stay left of center on narrow screens');
+  assert(portraitX < 120, 'narrow-screen player position should stay left of center');
+  assert(portraitX > 60, 'narrow-screen player position should still keep a stable left safety margin');
 
   const player = createPlayerState({
     groundY: 220,

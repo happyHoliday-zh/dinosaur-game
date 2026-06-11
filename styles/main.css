@@ -50,7 +50,9 @@ kbd {
 
 .game-frame {
   position: relative;
-  width: min(100%, 960px);
+  width: min(960px, calc((100vh - 36px) * 16 / 7), calc(100vw - 36px));
+  max-width: 100%;
+  max-height: calc(100vh - 36px);
   aspect-ratio: 16 / 7;
   overflow: hidden;
   border: 4px solid rgba(255, 255, 255, 0.12);
@@ -646,17 +648,22 @@ kbd {
   }
 
   .game-frame {
-    aspect-ratio: 10 / 12;
-    width: min(100%, 480px);
+    width: min(100%, calc((100vh - 20px) * 16 / 7));
+    max-height: calc(100vh - 20px);
   }
 
   .hud {
     inset: 10px 10px auto 10px;
-    flex-wrap: wrap;
+    gap: 8px;
   }
 
   .hud-panel {
     padding: 8px 10px;
+  }
+
+  .hud-toggle {
+    padding: 8px 10px;
+    font-size: 0.78rem;
   }
 
   .player {
@@ -666,6 +673,7 @@ kbd {
 
   .overlay-card {
     padding: 18px;
+    width: min(100%, 360px);
   }
 
   .torch-left {

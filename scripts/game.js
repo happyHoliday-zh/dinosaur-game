@@ -83,11 +83,10 @@ export class DungeonRunnerGame {
     const trackWidth = this.track.clientWidth || GAME_CONFIG.width;
     const trackHeight = this.track.clientHeight || GAME_CONFIG.height;
     const groundY = trackHeight - GAME_CONFIG.groundOffset;
-    const isPortrait = trackHeight > trackWidth;
 
     this.player = createPlayerState({
       ...GAME_CONFIG.player,
-      x: resolvePlayerX(trackWidth, isPortrait),
+      x: resolvePlayerX(trackWidth),
       groundY,
     });
 
@@ -112,7 +111,6 @@ export class DungeonRunnerGame {
     const trackWidth = this.track.clientWidth || GAME_CONFIG.width;
     const trackHeight = this.track.clientHeight || GAME_CONFIG.height;
     const groundY = trackHeight - GAME_CONFIG.groundOffset;
-    const isPortrait = trackHeight > trackWidth;
 
     if (!this.player) {
       return;
@@ -120,7 +118,7 @@ export class DungeonRunnerGame {
 
     const heightAboveGround = this.player.baseY - this.player.y;
 
-    this.player.x = resolvePlayerX(trackWidth, isPortrait);
+    this.player.x = resolvePlayerX(trackWidth);
     this.player.baseY = groundY - this.player.height;
     this.player.y = this.player.baseY - heightAboveGround;
 
