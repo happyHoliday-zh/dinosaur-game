@@ -62,6 +62,32 @@ export function runInputTests() {
   assert(started === 1, 'space key should start the game from ready state');
   assert(jumped === 0, 'space should start the game before triggering jump');
 
+  state = 'ready';
+  documentTarget.dispatch('keydown', {
+    key: ' ',
+    defaultPrevented: true,
+    preventDefault() {},
+  });
+
+  assert(started === 2, 'space key should still start the game even if a focused button marked the event as prevented');
+
+  state = 'ready';
+  documentTarget.dispatch('keyup', {
+    key: ' ',
+    preventDefault() {},
+  });
+
+  assert(started === 3, 'space keyup should also be able to start the game in environments that trigger lifecycle actions on keyup');
+
+  state = 'ready';
+  documentTarget.dispatch('keydown', {
+    key: 'Unidentified',
+    code: '',
+    preventDefault() {},
+  });
+
+  assert(started === 4, 'ready state should start on generic non-modifier key input even when browser does not report space consistently');
+
   controller.destroy();
   globalThis.window = originalWindow;
   globalThis.document = originalDocument;

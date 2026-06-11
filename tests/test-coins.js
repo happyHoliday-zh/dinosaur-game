@@ -3,6 +3,7 @@ import {
   createCoinPattern,
   updateCoins,
   collectCoins,
+  shouldSpawnCoinPattern,
 } from '../scripts/coins.js';
 
 function assert(condition, message) {
@@ -44,4 +45,6 @@ export function runCoinTests() {
 
   assert(collected === 1, 'player bounds should collect intersecting coin');
   assert(manager.items[0].collected === true, 'collected coin should be marked');
+  assert(shouldSpawnCoinPattern(240, 180) === true, 'coin pattern should be allowed after enough travel distance');
+  assert(shouldSpawnCoinPattern(120, 180) === false, 'coin pattern should wait until enough travel distance has accumulated');
 }

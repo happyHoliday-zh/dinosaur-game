@@ -1,6 +1,6 @@
 import { GAME_CONFIG, clamp, randomBetween } from './config.js';
 import { createAmbientAudioController } from './audio.js';
-import { collectCoins, createCoinManager, createCoinPattern, updateCoins } from './coins.js';
+import { collectCoins, createCoinManager, createCoinPattern, shouldSpawnCoinPattern, updateCoins } from './coins.js';
 import { createInputController } from './input.js';
 import { createObstacleManager, detectCollision, getObstacleBounds, listObstacleTypes, markPassedObstacles, shouldSpawnObstacle, updateObstacles } from './obstacles.js';
 import { createPlayerState, getPlayerBounds, jumpPlayer, updatePlayer } from './player.js';
@@ -45,6 +45,18 @@ export class DungeonRunnerGame {
   bindUi() {
     this.startButton.addEventListener('click', () => this.start());
     this.restartButton.addEventListener('click', () => this.restart());
+    this.startButton.addEventListener('keydown', (event) => {
+      if (event.key === ' ' || event.key === 'Enter') {
+        event.preventDefault();
+        this.start();
+      }
+    });
+    this.restartButton.addEventListener('keydown', (event) => {
+      if (event.key === ' ' || event.key === 'Enter') {
+        event.preventDefault();
+        this.restart();
+      }
+    });
     this.ui.bindAudioToggle(() => {
       const isMuted = this.audio.toggleMute();
       this.ui.updateAudioToggle(isMuted);
@@ -206,7 +218,7 @@ export class DungeonRunnerGame {
       this.totalCoins += collectedCoins;
     }
 
-    if (this.coinDistanceTimer >= GAME_CONFIG.coinPatternDistance) {
+    if (shouldSpawnCoinPattern(this.coinDistanceTimer, GAME_CONFIG.coinPatternDistance)) {
       this.spawnCoinPattern();
       this.coinDistanceTimer = 0;
     }

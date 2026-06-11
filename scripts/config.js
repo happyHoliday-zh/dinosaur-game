@@ -4,7 +4,7 @@ export const GAME_CONFIG = {
   groundOffset: 58,
   scoreRate: 18,
   pointsPerObstacle: 25,
-  coinPatternDistance: 200,
+  coinPatternDistance: 320,
   spawnDelayRange: [0.95, 1.65],
   obstacleTypes: ['spike', 'skull', 'fire'],
   player: {
@@ -12,7 +12,7 @@ export const GAME_CONFIG = {
     height: 40,
     jumpVelocity: 680,
     gravity: 1800,
-    x: 176,
+    x: 204,
   },
   movement: {
     baseSpeed: 290,

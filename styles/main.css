@@ -284,23 +284,23 @@ kbd {
 }
 
 .skeleton-skull {
-  left: 10px;
-  top: 2px;
-  width: 22px;
-  height: 20px;
-  background: #efe8d7;
-  border: 4px solid #14151b;
-  border-radius: 8px 8px 10px 10px;
+  left: 9px;
+  top: 3px;
+  width: 20px;
+  height: 18px;
+  background: #e0c7a0;
+  border: 4px solid #17181e;
+  border-radius: 10px 10px 7px 7px;
   z-index: 3;
 }
 
 .helmet-cap {
-  left: 8px;
-  top: -2px;
+  left: 7px;
+  top: -1px;
   width: 24px;
-  height: 10px;
-  background: linear-gradient(180deg, #6e7892, #41495e);
-  border: 4px solid #14151b;
+  height: 9px;
+  background: linear-gradient(180deg, #8891a7, #565f75);
+  border: 4px solid #17181e;
   border-bottom-width: 0;
   border-radius: 8px 8px 0 0;
   z-index: 4;
@@ -308,9 +308,10 @@ kbd {
 
 .skeleton-eye {
   top: 5px;
-  width: 5px;
-  height: 5px;
-  background: #14151b;
+  width: 4px;
+  height: 4px;
+  background: #17181e;
+  border-radius: 50%;
 }
 
 .skeleton-eye-left {
@@ -323,38 +324,36 @@ kbd {
 
 .skeleton-nose {
   left: 8px;
-  top: 10px;
-  width: 6px;
+  top: 9px;
+  width: 4px;
   height: 4px;
-  background: #14151b;
-  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  background: #17181e;
 }
 
 .skeleton-teeth {
   left: 4px;
-  bottom: 2px;
+  bottom: 1px;
   width: 10px;
-  height: 5px;
-  background:
-    linear-gradient(90deg, #14151b 0 2px, transparent 2px 4px, #14151b 4px 6px, transparent 6px 8px, #14151b 8px 10px);
+  height: 4px;
+  background: #17181e;
 }
 
 .skeleton-body {
-  left: 12px;
-  top: 22px;
-  width: 14px;
-  height: 12px;
-  background: #374158;
-  border: 4px solid #14151b;
-  border-radius: 4px 4px 6px 6px;
+  left: 11px;
+  top: 20px;
+  width: 15px;
+  height: 13px;
+  background: linear-gradient(180deg, #70788c, #454d61);
+  border: 4px solid #17181e;
+  border-radius: 4px;
   z-index: 2;
 }
 
 .rib {
   left: 2px;
-  width: 6px;
+  width: 7px;
   height: 2px;
-  background: #efe8d7;
+  background: rgba(248, 240, 225, 0.75);
 }
 
 .rib-a {
@@ -371,43 +370,43 @@ kbd {
 
 .skeleton-leg {
   bottom: 0;
-  width: 4px;
-  height: 10px;
-  background: #efe8d7;
-  border: 3px solid #14151b;
+  width: 5px;
+  height: 9px;
+  background: #6b7283;
+  border: 3px solid #17181e;
   border-top-width: 0;
   border-radius: 0 0 3px 3px;
   z-index: 1;
 }
 
 .skeleton-leg-left {
-  left: 13px;
+  left: 12px;
 }
 
 .skeleton-leg-right {
-  right: 11px;
+  right: 10px;
 }
 
 .skeleton-shield {
-  left: -4px;
-  top: 18px;
-  width: 12px;
-  height: 14px;
-  background: linear-gradient(180deg, #7a839d, #475068);
-  border: 4px solid #14151b;
-  border-radius: 10px 8px 8px 10px;
+  left: -2px;
+  top: 17px;
+  width: 10px;
+  height: 13px;
+  background: linear-gradient(180deg, #767f94, #4b5367);
+  border: 4px solid #17181e;
+  border-radius: 9px 7px 7px 9px;
   z-index: 1;
 }
 
 .skeleton-cape {
-  right: 4px;
+  right: 3px;
   top: 18px;
-  width: 10px;
-  height: 16px;
-  background: linear-gradient(180deg, #6a2530, #38121a);
-  border: 4px solid #14151b;
+  width: 8px;
+  height: 14px;
+  background: linear-gradient(180deg, #7d2f2f, #471818);
+  border: 4px solid #17181e;
   border-left-width: 0;
-  border-radius: 0 6px 8px 2px;
+  border-radius: 0 5px 7px 2px;
   z-index: 0;
 }
 

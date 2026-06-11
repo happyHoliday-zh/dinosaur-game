@@ -53,3 +53,7 @@ export function collectCoins(manager, playerBounds) {
 
   return collected;
 }
+
+export function shouldSpawnCoinPattern(distanceSinceLastPattern, gapDistance) {
+  return distanceSinceLastPattern >= gapDistance;
+}
