@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Dungeon Runner</title>
+    <link rel="stylesheet" href="./styles/main.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="game-frame" id="game-root" aria-label="地下城跑酷游戏" tabindex="0">
+        <div class="game-skyline" aria-hidden="true">
+          <span class="moon"></span>
+          <span class="cloud cloud-left"></span>
+          <span class="cloud cloud-right"></span>
+        </div>
+        <div class="game-track" id="game-track">
+          <div class="torches" aria-hidden="true">
+            <span class="torch torch-left"></span>
+            <span class="torch torch-right"></span>
+          </div>
+          <div class="player" id="player" aria-hidden="true">
+            <div class="player-sprite skeleton-runner" id="player-sprite"></div>
+          </div>
+          <div class="coin-layer" id="coin-layer" aria-hidden="true"></div>
+          <div class="obstacle-layer" id="obstacle-layer" aria-hidden="true"></div>
+        </div>
+
+        <header class="hud">
+          <div class="hud-panel">
+            <span class="hud-label">COINS</span>
+            <strong id="coin-count">000</strong>
+          </div>
+          <div class="hud-panel hud-panel-right">
+            <span class="hud-label">HI</span>
+            <strong id="high-score">00000</strong>
+            <span class="hud-label">RUN</span>
+            <strong id="score">00000</strong>
+          </div>
+        </header>
+
+        <section class="overlay overlay-visible" id="start-overlay">
+          <div class="overlay-card">
+            <p class="eyebrow">Dungeon Runner</p>
+            <h1>骑士冲出地下城</h1>
+            <p>自动前进，躲开地刺与骷髅。</p>
+            <p>PC 按 <kbd>Space</kbd> / <kbd>↑</kbd>，手机点击屏幕跳跃。</p>
+            <button class="overlay-button" id="start-button" type="button">开始冒险</button>
+          </div>
+        </section>
+
+        <section class="overlay" id="game-over-overlay">
+          <div class="overlay-card">
+            <p class="eyebrow">Run Over</p>
+            <h2>你被地下城拦下了</h2>
+            <p>本局分数 <strong id="final-score">00000</strong></p>
+            <p>累计金币 <strong id="final-coins">000</strong></p>
+            <button class="overlay-button" id="restart-button" type="button">重新开始</button>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script type="module" src="./scripts/main.js"></script>
+  </body>
+</html>
