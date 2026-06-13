@@ -4,6 +4,7 @@ import { runInputTests } from './test-input.js';
 import { runCoinTests } from './test-coins.js';
 import { runAudioTests } from './test-audio.js';
 import { runGameStartTests } from './test-game-start.js';
+import { runBrowserEntryTests } from './test-browser-entry.js';
 
 const suites = [
   ['player', runPlayerTests],
@@ -12,6 +13,7 @@ const suites = [
   ['coins', runCoinTests],
   ['audio', runAudioTests],
   ['game-start', runGameStartTests],
+  ['browser-entry', runBrowserEntryTests],
 ];
 
 const failures = [];
